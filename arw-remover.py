@@ -4,7 +4,7 @@ from tkinter import filedialog
 import os
 
 FILE_TYPE1 = ".jpg"
-FILE_TYPE2 = ".raw"
+FILE_TYPE2 = ".arw"
 
 def main():
     files_removed_count = 0
