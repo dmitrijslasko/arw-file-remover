@@ -9,7 +9,7 @@ For example, if you have file1.jpg and file1.arw and file2.arw in a folder, the 
 **It will create a folder named "_removed" and move all the files there.**
 **If a folder named "_removed" already exists and is not empty, it will create folder named "__removed"..**
 
-**After all obsolete files are sorted & moved to the new folder, you can safely remove the files yourself.**
+**After all obsolete files are sorted & moved to the new folder, you can safely remove the files yourself.**\
 **This is to ensure you are the one to blame if you delete something you need. ;).**
 
 It can be also used for removing other types of files (you will have to change the file extension inside the code).
