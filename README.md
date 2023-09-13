@@ -1,6 +1,6 @@
 # ARW FILE REMOVER
 Python script initially written for sorting photoshoot files for Sony cameras.
-<br>
+<hr>
 
 This Python script removes ARW files that don't have a corresponding JPG file with same name inside the same folder.\
 (After you have selected the files you want to keep)
