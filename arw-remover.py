@@ -3,38 +3,37 @@
 from tkinter import filedialog
 import os
 
-FILE_TYPE1 = ".jpg"
-FILE_TYPE2 = ".arw"
+FILE_TYPE_REFERENCE = ".jpg"        # file format to be used as a reference
+FILE_TYPE_TO_BE_REMOVED = ".txt"    # file format to be removed
+
+files_of_type1 = []
+files_of_type2 = []
+files_to_be_removed = []
 
 def main():
-    files_removed_count = 0
-    
-    removed_folder_name = "_removed/"
+    removed_folder_name = f"_removed-{FILE_TYPE_TO_BE_REMOVED}/"
 
+    # LET THE USER TO PICK THE DIRECTORY WITH FILES
     directory = filedialog.askdirectory()
-    print(directory)
-
-    files_of_type1 = []
-    files_of_type2 = []
-    files_to_be_moved = []
 
     files = os.listdir(directory)
+
     for file in files:
-        print(file)
-        if FILE_TYPE1 in file:
-            files_of_type1.append(file.replace(FILE_TYPE1, ""))
-        elif FILE_TYPE2 in file:
-            files_of_type2.append(file.replace(FILE_TYPE2, ""))
+        if FILE_TYPE_REFERENCE in file: files_of_type1.append(file.replace(FILE_TYPE_REFERENCE, ""))
+        elif FILE_TYPE_TO_BE_REMOVED in file: files_of_type2.append(file.replace(FILE_TYPE_TO_BE_REMOVED, ""))
+
+    print(files_of_type1)
+    print(files_of_type2)
+    print(set(files_of_type1).difference(set(files_of_type2)))
 
     for file in files_of_type2:
-        if file in files_of_type1:
-            continue
+        if file in files_of_type1: continue
         else:
-            old_path = os.path.join(directory, file + FILE_TYPE2)
-            files_to_be_moved.append(old_path)
+            old_path = os.path.join(directory, file + FILE_TYPE_TO_BE_REMOVED)
+            files_to_be_removed.append(old_path)
 
     # IF THERE ARE FILES TO BE MOVED
-    if len(files_to_be_moved) > 0:
+    if len(files_to_be_removed) > 0:
         
         # SEE IF NEED A NEW FOLDER NAME FOR THE FOLDER WITH REMOVED FILES
         removed_folder_path = os.path.join(directory, removed_folder_name)
@@ -46,12 +45,12 @@ def main():
         # CREATE NEW FOLDER WITH THE NAME
         os.mkdir(removed_folder_path)
 
-    print(files_to_be_moved)
+    print(files_to_be_removed)
 
-    for file in files_to_be_moved:
+    # MOVE THE FILES
+    for file in files_to_be_removed:
         new_path = os.path.join(directory, removed_folder_name, os.path.basename(file))
         os.rename(file, new_path)
-    
+
 if __name__ == "__main__":
     main()
-    
